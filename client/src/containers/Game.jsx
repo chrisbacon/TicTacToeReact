@@ -16,7 +16,7 @@ class Game extends React.Component {
 
     changeBoardState(x, y) {
         if (!this.state.running) { return }
-            
+
         const newBoard = this.state.board.slice();
         newBoard[x][y] = this.state.currentPlayer;
 
@@ -92,6 +92,14 @@ class Game extends React.Component {
         }   
     }
 
+    reset() {
+        this.setState({
+            board: [["", "", ""], ["", "", ""], ["", "", ""]],
+            currentPlayer: "X",
+            running: true
+        });
+    }
+
     render (){
         let count = 0;
         let self = this;
@@ -102,8 +110,13 @@ class Game extends React.Component {
             })
         })
         return (
-            <div className='board'>
-                {tiles}
+            <div>
+                <div className='board'>
+                    {tiles}
+                </div>
+                <button onClick={this.reset.bind(this)}>
+                    New Game
+                </button>
             </div>
         )
     }
