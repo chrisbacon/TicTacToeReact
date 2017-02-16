@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Tile from '../components/Tile.jsx';
+import Panel from '../components/Panel.jsx';
 
 class Game extends React.Component {
 
@@ -10,7 +11,9 @@ class Game extends React.Component {
         this.state = {
             board: [["", "", ""], ["", "", ""], ["", "", ""]],
             currentPlayer: "X",
-            running: true
+            running: true,
+            winner: "",
+            count: {"X": 0, "O": 0}
         }
     }
 
@@ -34,7 +37,14 @@ class Game extends React.Component {
     }
 
     checkForWinner(player) {
-        this.state.running = !(this.checkColumns(player) || this.checkDiagonals(player) || this.checkRows(player));
+        if (this.checkColumns(player) || this.checkDiagonals(player) || this.checkRows(player)) {
+            this.state.running = false;
+            this.state.winner = player;
+            let newCount = this.state.count
+            newCount[player]++
+            this.setState({count: newCount})
+        }
+
     }
 
     checkRows(player) {
@@ -96,7 +106,8 @@ class Game extends React.Component {
         this.setState({
             board: [["", "", ""], ["", "", ""], ["", "", ""]],
             currentPlayer: "X",
-            running: true
+            running: true,
+            winner: ""
         });
     }
 
@@ -110,13 +121,11 @@ class Game extends React.Component {
             })
         })
         return (
-            <div>
+            <div className="container">
                 <div className='board'>
                     {tiles}
                 </div>
-                <button onClick={this.reset.bind(this)}>
-                    New Game
-                </button>
+                <Panel count = {this.state.count} reset = {this.reset.bind(this)} winner = {this.state.winner} currentPlayer = {this.state.currentPlayer} /> 
             </div>
         )
     }
