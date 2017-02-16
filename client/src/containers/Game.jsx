@@ -13,7 +13,8 @@ class Game extends React.Component {
             currentPlayer: "X",
             running: true,
             winner: "",
-            count: {"X": 0, "O": 0}
+            count: {"X": 0, "O": 0},
+            style: "traditional"
         }
     }
 
@@ -111,13 +112,17 @@ class Game extends React.Component {
         });
     }
 
+    setStyle(newStyle) {
+        this.setState({style: newStyle});
+    }
+
     render (){
         let count = 0;
         let self = this;
         const tiles = this.state.board.map(function(outer, i) {
             return outer.map(function(inner, j) {
                 count++
-                return <Tile x={i} y={j} value={self.state.board[i][j]} key={count} changeBoardState={self.changeBoardState.bind(self)}/>
+                return <Tile x={i} y={j} style={self.state.style} value={self.state.board[i][j]} key={count} changeBoardState={self.changeBoardState.bind(self)}/>
             })
         })
         return (
@@ -125,7 +130,7 @@ class Game extends React.Component {
                 <div className='board'>
                     {tiles}
                 </div>
-                <Panel count = {this.state.count} reset = {this.reset.bind(this)} winner = {this.state.winner} currentPlayer = {this.state.currentPlayer} /> 
+                <Panel count = {this.state.count} reset = {this.reset.bind(this)} winner = {this.state.winner} currentPlayer = {this.state.currentPlayer} setStyle={this.setStyle.bind(this)} /> 
             </div>
         )
     }
