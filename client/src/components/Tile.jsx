@@ -6,7 +6,9 @@ class Tile extends React.Component {
     }
 
     handleClick(event) {
-        this.props.changeBoardState(this.props.x, this.props.y) 
+        if (event.target.innerText === "") {
+            this.props.changeBoardState(this.props.x, this.props.y)
+        } 
     }
 
     render() {
