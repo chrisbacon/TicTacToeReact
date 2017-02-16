@@ -3,10 +3,10 @@ import React from 'react';
 class Tile extends React.Component {
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-            value: ""
-        }
+    handleClick(event) {
+        this.props.changeBoardState(this.props.x, this.props.y) 
     }
 
     render() {
@@ -16,8 +16,8 @@ class Tile extends React.Component {
 
         return(
 
-            <div className={"tile " + horzClass[this.props.x] + " " +vertClass[this.props.y]}>
-                {this.state.value}
+            <div className={"tile " + horzClass[this.props.x] + " " +vertClass[this.props.y]} onClick={this.handleClick.bind(this)}>
+                <span className="tileValue">{this.props.value}</span>
             </div>
 
             )

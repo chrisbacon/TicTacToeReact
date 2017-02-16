@@ -8,11 +8,16 @@ body{
 }
 
 .tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 1px black solid;
   position: absolute;
   width: 200px;
   height: 200px;
+  cursor: pointer;
 }
+
 
 .top {
   top: 0;
@@ -36,4 +41,8 @@ body{
 
 .right {
   left: 400px;
+}
+
+.tileValue {
+  font-size: 100px;
 }
