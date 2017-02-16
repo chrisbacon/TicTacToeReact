@@ -5,6 +5,7 @@ body{
 .board {
   width: 600px;
   height: 600px;
+  cursor: pointer;
 }
 
 .tile {
@@ -15,7 +16,6 @@ body{
   position: absolute;
   width: 200px;
   height: 200px;
-  cursor: pointer;
 }
 
 

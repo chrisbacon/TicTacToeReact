@@ -9,15 +9,18 @@ class Game extends React.Component {
 
         this.state = {
             board: [["", "", ""], ["", "", ""], ["", "", ""]],
-            currentPlayer: "X"
+            currentPlayer: "X",
+            running: true
         }
     }
 
     changeBoardState(x, y) {
+        if (!this.state.running) { return }
+            
         const newBoard = this.state.board.slice();
         newBoard[x][y] = this.state.currentPlayer;
 
-        this.setState({board:newBoard}, this.checkForWinner(this.state.currentPlayer));
+        this.setState({board:newBoard}, this.checkForWinner.bind(this)(this.state.currentPlayer));
 
         switch (this.state.currentPlayer) {
             case "X":
@@ -31,8 +34,7 @@ class Game extends React.Component {
     }
 
     checkForWinner(player) {
-        // this.checkRows(player);
-        console.log (this.checkColumns(player) || this.checkDiagonals(player) || this.checkRows(player));
+        this.state.running = !(this.checkColumns(player) || this.checkDiagonals(player) || this.checkRows(player));
     }
 
     checkRows(player) {

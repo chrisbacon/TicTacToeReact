@@ -18,7 +18,7 @@ class Tile extends React.Component {
 
         return(
 
-            <div className={"tile " + horzClass[this.props.x] + " " +vertClass[this.props.y]} onClick={this.handleClick.bind(this)}>
+            <div className={"tile " + horzClass[this.props.x] + " " + vertClass[this.props.y]} onClick={this.handleClick.bind(this)}>
                 <span className="tileValue">{this.props.value}</span>
             </div>
 
